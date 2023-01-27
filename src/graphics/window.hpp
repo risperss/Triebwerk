@@ -1,5 +1,8 @@
 #pragma once
 
+#include "input/keyboard.hpp"
+#include "input/mouse.hpp"
+
 // clang-format off
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -15,6 +18,8 @@ class Window {
     int m_Width, m_Height;
     const char* m_Title;
     GLFWwindow* m_Window;
+    input::Keyboard m_Keyboard;
+    input::Mouse m_Mouse;
 
    public:
     Window(int width, int height, const char* title);

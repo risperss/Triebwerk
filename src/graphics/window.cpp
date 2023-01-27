@@ -20,6 +20,9 @@ Window::Window(int width, int height, const char* title) {
     if (!init()) {
         glfwTerminate();
     }
+
+    m_Keyboard = input::Keyboard(m_Window);
+    m_Mouse = input::Mouse(m_Window);
 }
 
 Window::~Window() { glfwTerminate(); }
@@ -49,6 +52,8 @@ bool Window::init() {
     }
 
     glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
+
+    glfwSetWindowUserPointer(m_Window, this);
 
     return true;
 }
