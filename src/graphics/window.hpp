@@ -19,8 +19,13 @@ class Window {
    public:
     Window(int width, int height, const char* title);
     ~Window();
+
+    inline int getWidth() const { return m_Width; }
+    inline int getHeight() const { return m_Height; }
+
+    void clear() const;
+    void update();
     bool closed() const;
-    void update() const;
 
    private:
     bool init();

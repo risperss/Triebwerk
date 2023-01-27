@@ -3,9 +3,11 @@
 namespace triebwerk {
 
 namespace {
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
+
 }  // namespace
 
 namespace graphics {
@@ -46,22 +48,21 @@ bool Window::init() {
         return false;
     }
 
-    // Prevents scaling issues with high DPI displays
-    int width;
-    int height;
-    glfwGetFramebufferSize(m_Window, &width, &height);
-    glViewport(0, 0, width, height);
     glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
 
     return true;
 }
 
-bool Window::closed() const { return glfwWindowShouldClose(m_Window); }
+void Window::clear() const {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
-void Window::update() const {
+void Window::update() {
     glfwSwapBuffers(m_Window);
     glfwPollEvents();
 }
+
+bool Window::closed() const { return glfwWindowShouldClose(m_Window) == 1; }
 
 }  // namespace graphics
 }  // namespace triebwerk
