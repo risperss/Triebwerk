@@ -15,6 +15,8 @@ link_directories(
 add_executable(triebwerk
     src/main.cpp
     src/deps/glad.c
+    src/graphics/window.cpp
+    src/graphics/window.hpp
 )
 
 target_link_libraries(triebwerk glfw.3.3)
