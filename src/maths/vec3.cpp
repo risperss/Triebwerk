@@ -48,7 +48,7 @@ vec3& operator*(vec3& left, const vec3& right) { return left.multiply(right); }
 vec3& operator/(vec3& left, const vec3& right) { return left.divide(right); }
 
 bool vec3::operator==(const vec3& other) {
-    return x == other.x && y == other.y;
+    return x == other.x && y == other.y && z == other.z;
 }
 bool vec3::operator!=(const vec3& other) { return !(*this == other); }
 
