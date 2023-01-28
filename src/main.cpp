@@ -10,9 +10,22 @@ int main(void) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
+    int x, y;
+
     while (!window.closed()) {
         std::cout << window.getWidth() << " " << window.getHeight()
                   << std::endl;
+
+        if (window.isKeyPressed(GLFW_KEY_A)) {
+            std::cout << "PRESSED" << std::endl;
+        }
+
+        window.getMousePosition(x, y);
+        std::cout << x << ", " << y << std::endl;
+
+        if (window.isMousePressed(GLFW_MOUSE_BUTTON_RIGHT)) {
+            std::cout << "RIGHT CLICK" << std::endl;
+        }
 
         window.clear();
         window.update();

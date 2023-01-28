@@ -2,27 +2,22 @@
 
 namespace triebwerk {
 
-namespace {
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    glViewport(0, 0, width, height);
-}
-
-}  // namespace
-
 namespace graphics {
 
 Window::Window(int width, int height, const char* title) {
     m_Width = width;
     m_Height = height;
     m_Title = title;
-
     if (!init()) {
         glfwTerminate();
     }
 
-    m_Keyboard = input::Keyboard(m_Window);
-    m_Mouse = input::Mouse(m_Window);
+    for (int i = 0; i < k_NumKeys; i++) {
+        m_Keys[i] = false;
+    }
+    for (int i = 0; i < k_NumButtons; i++) {
+        m_Buttons[i] = false;
+    }
 }
 
 Window::~Window() { glfwTerminate(); }
@@ -51,9 +46,15 @@ bool Window::init() {
         return false;
     }
 
-    glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
+    // Solution for high DPI displays
+    glfwGetFramebufferSize(m_Window, &m_Width, &m_Height);
+    glViewport(0, 0, m_Width, m_Width);
 
     glfwSetWindowUserPointer(m_Window, this);
+    glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
+    glfwSetKeyCallback(m_Window, key_callback);
+    glfwSetCursorPosCallback(m_Window, cursor_position_callback);
+    glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 
     return true;
 }
@@ -68,6 +69,61 @@ void Window::update() {
 }
 
 bool Window::closed() const { return glfwWindowShouldClose(m_Window) == 1; }
+
+bool Window::isKeyPressed(unsigned int keycode) const {
+    // TODO: some kind of logging system
+    if (keycode >= k_NumKeys) {
+        return false;
+    }
+    return m_Keys[keycode];
+}
+
+bool Window::isMousePressed(unsigned int button) const {
+    if (button >= k_NumButtons) {
+        return false;
+    }
+    return m_Buttons[button];
+}
+
+void Window::getMousePosition(int& x, int& y) {
+    x = m_X;
+    y = m_Y;
+}
+
+// Private
+void Window::framebuffer_size_callback(GLFWwindow* window, int width,
+                                       int height) {
+    Window* win = (Window*)glfwGetWindowUserPointer(window);
+    win->setWidth(width);
+    win->setHeight(height);
+    glViewport(0, 0, width, height);
+}
+
+void Window::key_callback(GLFWwindow* window, int key, int scancode, int action,
+                          int mods) {
+    Window* win = (Window*)glfwGetWindowUserPointer(window);
+    if (action == GLFW_PRESS) {
+        win->setKey(key);
+    } else if (action == GLFW_RELEASE) {
+        win->resetKey(key);
+    }
+}
+
+void Window::cursor_position_callback(GLFWwindow* window, double xpos,
+                                      double ypos) {
+    Window* win = (Window*)glfwGetWindowUserPointer(window);
+    win->setCursorPosition(xpos, ypos);
+}
+
+void Window::mouse_button_callback(GLFWwindow* window, int button, int action,
+                                   int mods) {
+    Window* win = (Window*)glfwGetWindowUserPointer(window);
+    if (action == GLFW_PRESS) {
+        win->setButton(button);
+    } else {
+        win->resetButton(button);
+    }
+}
 
 }  // namespace graphics
 }  // namespace triebwerk
