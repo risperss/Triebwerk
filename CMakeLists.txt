@@ -19,6 +19,8 @@ add_executable(triebwerk
     src/graphics/window.hpp
     src/maths/vec2.cpp
     src/maths/vec2.hpp
+    src/maths/vec3.cpp
+    src/maths/vec3.hpp
 )
 
 target_link_libraries(triebwerk glfw.3.3)
