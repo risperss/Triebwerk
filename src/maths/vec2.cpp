@@ -36,10 +36,10 @@ vec2& vec2::divide(const vec2& other) {
     return *this;
 }
 
-vec2& operator+(vec2& left, const vec2& right) { return left.add(right); }
-vec2& operator-(vec2& left, const vec2& right) { return left.subtract(right); }
-vec2& operator*(vec2& left, const vec2& right) { return left.multiply(right); }
-vec2& operator/(vec2& left, const vec2& right) { return left.divide(right); }
+vec2& operator+(vec2 left, const vec2& right) { return left.add(right); }
+vec2& operator-(vec2 left, const vec2& right) { return left.subtract(right); }
+vec2& operator*(vec2 left, const vec2& right) { return left.multiply(right); }
+vec2& operator/(vec2 left, const vec2& right) { return left.divide(right); }
 
 bool vec2::operator==(const vec2& other) {
     return x == other.x && y == other.y;

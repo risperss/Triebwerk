@@ -48,10 +48,10 @@ vec4& vec4::divide(const vec4& other) {
     return *this;
 }
 
-vec4& operator+(vec4& left, const vec4& right) { return left.add(right); }
-vec4& operator-(vec4& left, const vec4& right) { return left.subtract(right); }
-vec4& operator*(vec4& left, const vec4& right) { return left.multiply(right); }
-vec4& operator/(vec4& left, const vec4& right) { return left.divide(right); }
+vec4& operator+(vec4 left, const vec4& right) { return left.add(right); }
+vec4& operator-(vec4 left, const vec4& right) { return left.subtract(right); }
+vec4& operator*(vec4 left, const vec4& right) { return left.multiply(right); }
+vec4& operator/(vec4 left, const vec4& right) { return left.divide(right); }
 
 bool vec4::operator==(const vec4& other) {
     return x == other.x && y == other.y && z == other.z && w == other.w;

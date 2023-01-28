@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "graphics/window.hpp"
+#include "maths/maths.hpp"
 
 int main(void) {
     using namespace triebwerk;
@@ -11,6 +12,13 @@ int main(void) {
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     int x, y;
+
+    maths::vec3 origin = maths::vec3(0, 0, 0);
+    maths::vec3 other_point = maths::vec3(1, 2, 3);
+    origin += other_point;
+
+    std::cout << origin << std::endl;
+    return 0;
 
     while (!window.closed()) {
         std::cout << window.getWidth() << " " << window.getHeight()

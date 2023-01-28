@@ -17,6 +17,7 @@ add_executable(triebwerk
     src/deps/glad.c
     src/graphics/window.cpp
     src/graphics/window.hpp
+    src/maths/maths.hpp
     src/maths/vec2.cpp
     src/maths/vec2.hpp
     src/maths/vec3.cpp
