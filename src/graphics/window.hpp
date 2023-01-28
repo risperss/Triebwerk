@@ -50,7 +50,7 @@ class Window {
 
     bool isKeyPressed(unsigned int keycode) const;
     bool isMousePressed(unsigned int button) const;
-    void getMousePosition(int& x, int& y);
+    void getMousePosition(int& x, int& y) const;
 
    private:
     bool init();
