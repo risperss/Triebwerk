@@ -17,6 +17,8 @@ add_executable(triebwerk
     src/deps/glad.c
     src/graphics/window.cpp
     src/graphics/window.hpp
+    src/maths/vec2.cpp
+    src/maths/vec2.hpp
 )
 
 target_link_libraries(triebwerk glfw.3.3)
